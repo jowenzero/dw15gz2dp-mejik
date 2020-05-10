@@ -1,0 +1,190 @@
+.confirm-bg {
+    height: 500px;
+    background-color: rgba(196, 196, 196, 0.25);
+}
+
+.confirm-white-bg {
+    background-color: #fff;
+    margin-bottom: 7px;
+    padding-top: 5px;
+    padding-bottom: 5px;
+}
+
+.confirm-pic {
+    position: relative;
+    left: 140px;
+    max-width: 160px;
+    height: auto;
+}
+
+.confirm-name {
+    position: relative;
+    width: 350px;
+    left: 48px;
+    top: -10px;
+    font-family: Montserrat;
+    font-style: normal;
+    font-weight: bold;
+    text-align: center;
+    font-size: 18px;
+}
+
+.confirm-details {
+    position: relative;
+    width: 350px;
+    left: 48px;
+    color: #808080;
+    font-family: Montserrat;
+    font-style: normal;
+    font-weight: bold;
+    text-align: center;
+    font-size: 12px;
+}
+
+.confirm-name-2 {
+    position: relative;
+    width: 350px;
+    left: 7px;
+    top: 10px;
+    font-family: Montserrat;
+    font-style: normal;
+    font-weight: bold;
+    text-align: left;
+    font-size: 18px;
+}
+
+
+.confirm-total-text {
+    position: relative;
+    width: 400px;
+    left: 7px;
+    top: 10px;
+
+    font-family: Montserrat;
+    font-style: normal;
+    font-weight: bold;
+    text-align: left;
+    font-size: 16px;
+}
+
+.confirm-amount {
+    position: relative;
+    width: 107px;
+    top: 13px;
+
+    font-family: Montserrat;
+    font-style: normal;
+    font-weight: bold;
+    text-align: right;
+    font-size: 16px;
+
+    color: #dc3545;
+}
+
+.confirm-total {
+    position: relative;
+    width: 255px;
+    top: 10px;
+
+    font-family: Montserrat;
+    font-style: normal;
+    font-weight: bold;
+    text-align: right;
+    font-size: 16px;
+
+    color: #dc3545;
+}
+
+.confirm-navbar {
+    height: 60px;
+}
+
+.confirm-padding {
+    padding-bottom: 50px;
+}
+
+.confirm-bill-pic {
+    position: relative;
+    top: 10px;
+    left: 7px;
+    height: 50px;
+    width: 50px;
+    border-radius: 50%;
+}
+
+.confirm-bill-name {
+    position: relative;
+    top: 17px;
+
+    font-family: Montserrat;
+    font-style: normal;
+    font-weight: bold;
+    font-size: 16px;
+    line-height: 17px;
+}
+
+.confirm-bill-status {
+    position: relative;
+    top: 7px;
+
+    font-family: Montserrat;
+    font-style: normal;
+    font-weight: normal;
+    font-size: 13px;
+    line-height: 17px;
+
+    color: rgba(196, 196, 196, 1);
+}
+
+.color-grey {
+    color: #808080;
+}
+
+
+
+
+.files input {
+    outline: 2px dashed #dc3545;
+    outline-offset: -10px;
+    -webkit-transition: outline-offset .15s ease-in-out, background-color .15s linear;
+    transition: outline-offset .15s ease-in-out, background-color .15s linear;
+    padding: 100px 0px 70px 29%;
+    text-align: center !important;
+    margin: 0;
+    width: 100% !important;
+}
+.files input:focus{     outline: 2px dashed #dc3545;  outline-offset: -10px;
+    -webkit-transition: outline-offset .15s ease-in-out, background-color .15s linear;
+    transition: outline-offset .15s ease-in-out, background-color .15s linear; border:1px solid #dc3545;
+ }
+.files{ position:relative}
+.files:after {  pointer-events: none;
+    position: absolute;
+    top: 30px;
+    left: 0;
+    width: 50px;
+    right: 0;
+    height: 56px;
+    content: "";
+    background-image: url(https://image.flaticon.com/icons/png/128/109/109612.png);
+    display: block;
+    margin: 0 auto;
+    background-size: 100%;
+    background-repeat: no-repeat;
+}
+.color input{ background-color:#f1f1f1;}
+.files:before {
+    position: absolute;
+    bottom: 10px;
+    left: 0;  pointer-events: none;
+    width: 100%;
+    right: 0;
+    height: 57px;
+    padding-top: 15px;
+    content: "or drop a file here";
+    display: block;
+    margin: 0 auto;
+    color: #000;
+    font-weight: 600;
+    text-align: center;
+}

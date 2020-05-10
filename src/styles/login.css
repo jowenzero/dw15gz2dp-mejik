@@ -1,0 +1,39 @@
+.login-icons {
+    width: 30px;
+    height: 30px;
+}
+
+.login-email {
+    width: 150px;
+    height: 150px;
+}
+
+.login-title {
+    width: 400px;
+    height: 40px;
+
+    font-family: Montserrat;
+    font-style: normal;
+    font-weight: bold;
+    text-align: left;
+    font-size: 30px;
+}
+
+.login-text {
+    width: 400px;
+    height: 40px;
+    
+    font-family: Montserrat;
+    font-style: normal;
+    font-weight: normal;
+    text-align: left;
+    font-size: 15px;
+}
+
+.login-form {
+    font-family: Montserrat;
+    font-style: normal;
+    font-weight: bold;
+    text-align: left;
+    font-size: 15px;
+}

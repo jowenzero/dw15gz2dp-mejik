@@ -1,0 +1,65 @@
+[
+    {
+        "id": 1,
+        "firstName": "Dian",
+        "lastName": "Sranti",
+        "status": "Homeless",
+        "total": 600000
+    },
+    {
+        "id": 2,
+        "firstName": "Nahidzin",
+        "lastName": "",
+        "status": "Homeless",
+        "total": 600000
+    },
+    {
+        "id": 3,
+        "firstName": "Sucipto",
+        "lastName": "Prayugo",
+        "status": "Homeless",
+        "total": 600000
+    },
+    {
+        "id": 4,
+        "firstName": "Anjani",
+        "lastName": "Anjay",
+        "status": "Homeless",
+        "total": 600000
+    },
+    {
+        "id": 5,
+        "firstName": "Rizky",
+        "lastName": "Armansyah",
+        "status": "Homeless",
+        "total": 600000
+    },
+    {
+        "id": 6,
+        "firstName": "Bryan",
+        "lastName": "Sujatmiko",
+        "status": "Homeless",
+        "total": 600000
+    },
+    {
+        "id": 7,
+        "firstName": "Sulis",
+        "lastName": "Sarah",
+        "status": "Homeless",
+        "total": 600000
+    },
+    {
+        "id": 8,
+        "firstName": "Deddy",
+        "lastName": "C",
+        "status": "Homeless",
+        "total": 600000
+    },
+    {
+        "id": 9,
+        "firstName": "Ulfatut",
+        "lastName": "Thoah",
+        "status": "Homeless",
+        "total": 600000
+    }
+]

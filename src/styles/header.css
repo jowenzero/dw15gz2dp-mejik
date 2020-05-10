@@ -1,0 +1,32 @@
+/*=======================================
+            HEADER COMPONENTS
+========================================*/
+.navbar-header {
+    height: 70px;
+    box-shadow: 0px 1px 1px rgba(0, 0, 0, 0.25);
+}
+
+.padding-header {
+    padding-top: 70px;
+}
+
+.header-title {
+    padding-top: 10px;
+    font-family: Montserrat;
+    font-style: normal;
+    font-weight: bold;
+    font-size: 30px;
+}
+
+.header-text {
+    padding-top: 10px;
+    font-family: Montserrat;
+    font-style: normal;
+    font-weight: bold;
+    font-size: 24px;
+}
+
+.home-icons {
+    width: 30px;
+    height: 30px;
+}

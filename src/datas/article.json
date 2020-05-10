@@ -1,0 +1,38 @@
+[
+    {
+        "id": 1,
+        "title": "Artikel tentang Corona (yang sungguh amat parah)",
+        "description": "Ini adalah artikel tentang Covid-19. Lebih dikenal dengan nama Coronavirus atau lebih singkatnya Corona, ini adalah penyakit menular yang berbahaya",
+        "imageUrl": "../images/Thumbnail.png"
+    },
+    {
+        "id": 2,
+        "title": "Artikel tentang Corona (yang sungguh amat parah)",
+        "description": "Ini adalah artikel tentang Covid-19. Lebih dikenal dengan nama Coronavirus atau lebih singkatnya Corona, ini adalah penyakit menular yang berbahaya",
+        "imageUrl": "../images/Thumbnail.png"
+    },
+    {
+        "id": 3,
+        "title": "Artikel tentang Corona (yang sungguh amat parah)",
+        "description": "Ini adalah artikel tentang Covid-19. Lebih dikenal dengan nama Coronavirus atau lebih singkatnya Corona, ini adalah penyakit menular yang berbahaya",
+        "imageUrl": "../images/Thumbnail.png"
+    },
+    {
+        "id": 4,
+        "title": "Artikel tentang Corona (yang sungguh amat parah)",
+        "description": "Ini adalah artikel tentang Covid-19. Lebih dikenal dengan nama Coronavirus atau lebih singkatnya Corona, ini adalah penyakit menular yang berbahaya",
+        "imageUrl": "../images/Thumbnail.png"
+    },
+    {
+        "id": 5,
+        "title": "Artikel tentang Corona (yang sungguh amat parah)",
+        "description": "Ini adalah artikel tentang Covid-19. Lebih dikenal dengan nama Coronavirus atau lebih singkatnya Corona, ini adalah penyakit menular yang berbahaya",
+        "imageUrl": "../images/Thumbnail.png"
+    },
+    {
+        "id": 6,
+        "title": "Artikel tentang Corona (yang sungguh amat parah)",
+        "description": "Ini adalah artikel tentang Covid-19. Lebih dikenal dengan nama Coronavirus atau lebih singkatnya Corona, ini adalah penyakit menular yang berbahaya",
+        "imageUrl": "../images/Thumbnail.png"
+    }
+]

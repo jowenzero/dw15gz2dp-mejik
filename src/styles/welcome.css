@@ -1,0 +1,30 @@
+.welcome-image {
+    position: relative;
+    left: 110px;
+}
+
+.welcome-title {
+    position: relative;
+    width: 400px;
+    height: 40px;
+    left: 10px;
+
+    font-family: Montserrat;
+    font-style: normal;
+    font-weight: bold;
+    text-align: center;
+    font-size: 30px;
+}
+
+.welcome-text {
+    position: relative;
+    width: 400px;
+    height: 40px;
+    left: 10px;
+    
+    font-family: Montserrat;
+    font-style: normal;
+    font-weight: normal;
+    text-align: center;
+    font-size: 15px;
+}
