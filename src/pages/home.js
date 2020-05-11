@@ -131,6 +131,7 @@ const Home = () => {
             hideLoginFail();
             showHome();
         } catch (error) {
+            console.log(error)
             localStorage.setItem('userLogin', 'false');
             showLoginFail();
             setLoginEmail("");
@@ -176,6 +177,7 @@ const Home = () => {
             setUser({});
             showHome();
         } catch (error) {
+            console.log(error)
             localStorage.setItem('userLogin', 'false')
             setUser({});
         }

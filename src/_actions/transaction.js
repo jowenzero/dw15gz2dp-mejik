@@ -1,11 +1,13 @@
 import { GET_TRANSACTIONS } from "../constants/action-types";
-import { API } from "../config/api";
+import { API, setAuthToken } from "../config/api";
 
 export const getTransactions = () => {
   return {
     type: GET_TRANSACTIONS,
     async payload() {
       try {
+        const token = localStorage.getItem('userToken');
+        setAuthToken(token);
         const transactions = await API({
           method: 'post',
           data: {

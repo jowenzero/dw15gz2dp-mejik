@@ -1,8 +1,10 @@
-import React from 'react';
+import React, { useEffect, useCallback } from 'react';
 import { Form, Navbar, Container, Button, Row, Col } from "react-bootstrap";
 import { IoIosArrowDroprightCircle, IoIosArrowBack } from "react-icons/io";
-import { Link } from 'react-router-dom';
-import { useSelector } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
+import { getBeneficiaries } from "../_actions/beneficiary";
+import { getCategories } from "../_actions/category";
+import { API, setAuthToken } from "../config/api";
 
 import Header from '../components/header'
 import '../styles/donate.css';
@@ -14,6 +16,25 @@ const Donate = () => {
     const loading = useSelector(state => state.user.loading);
     const error = useSelector(state => state.user.error);
 
+    const beneficiary = useSelector(state => state.beneficiary.data);
+    const benefitLoading = useSelector(state => state.beneficiary.loading);
+    const benefitError = useSelector(state => state.beneficiary.error);
+
+    const category = useSelector(state => state.category.data);
+    const categoryLoading = useSelector(state => state.category.loading);
+    const categoryError = useSelector(state => state.category.error);
+
+    const dispatch = useDispatch();
+
+    const initFetch = useCallback(() => {
+        dispatch(getBeneficiaries());
+        dispatch(getCategories());
+    }, [dispatch]);
+    
+    useEffect(() => {
+        initFetch();
+    }, [initFetch]);
+
     const [location, setLocation] = React.useState("Donate");
     const [amount, setAmount] = React.useState(0);
     const [timeline, setTimeline] = React.useState(1);
@@ -22,7 +43,7 @@ const Donate = () => {
     var total = amount * timeline;
 
     if (name !== null)
-        var [firstName, lastName] = name.split(" ");
+        var [id, firstName, lastName] = name.split("|");
 
     const handleAmountChange = (event) => {
         setAmount(event.target.value);
@@ -48,6 +69,67 @@ const Donate = () => {
     if (location === "Confirm" && name === null) {
         hideConfirm();
     }
+
+    let benefitList;
+    let categoryList;
+
+    if (!benefitLoading && !benefitError && beneficiary) {
+        benefitList = beneficiary.beneficiaries.map((item, index) => (
+            <>
+                <Form.Control type="radio" name="radio4" id={item.id} value={item.id + "|" + item.firstName + "|" + item.lastName} onClick={handleNameChange}/><Form.Label htmlFor={item.id} className="label-2">
+                    <img src={ process.env.PUBLIC_URL + `../images/Profile.png` } alt="" className="label-pic"></img>
+                    <p className="label-name">{item.firstName + " " + item.lastName}</p>
+                    <p className="label-status">Lansia</p>
+                </Form.Label>
+            </>
+        ))
+    }
+
+    if (!categoryLoading && !categoryError && category) {
+        categoryList = category.categories.map((item, index) => (
+            <>
+                <Form.Control type="radio" name="radio1" id={item.id} value={item.name}/><Form.Label htmlFor={item.id} className="label-1">{item.name}</Form.Label>
+            </>
+        ))
+    }
+
+    const createTransaction = async (event) => {
+        try {
+            event.preventDefault();
+            const token = localStorage.getItem('userToken');
+            setAuthToken(token);
+            const newTransaction = await API({
+                method: 'post',
+                data: {
+                    query: `
+                        mutation {
+                            createTransaction(
+                                input: {
+                                    amount: ${amount}
+                                    timeline: ${timeline}
+                                    total: ${total}
+                                    beneficiaryId: "${id}"
+                                } 
+                            ){
+                                id
+                                amount
+                                timeline
+                                total
+                                beneficiary {
+                                    id
+                                    firstName
+                                    lastName
+                                }
+                            }
+                        }
+                    `
+                }
+            })
+            console.log(newTransaction.data.data)
+        } catch (error) {
+            console.log(error)
+        }
+    };
 
     return (
         <>
@@ -111,7 +193,7 @@ const Donate = () => {
         
                     <Container fluid className="confirm-padding">
                         <Navbar bg="white" fixed="bottom" className="confirm-navbar flex-column">
-                            <Button variant="danger" type="submit" as={Link} to="/history" block>
+                            <Button variant="danger" type="submit" onClick={createTransaction} block>
                                 CONFIRMATION
                             </Button>
                         </Navbar>
@@ -128,42 +210,17 @@ const Donate = () => {
                             <h1 className="donate-title">Donation Target</h1>
                             <Form.Group className="target cf col">
                                 <Form.Control type="radio" name="radio1" id="All" value="All"/><Form.Label htmlFor="All" className="label-1">All</Form.Label>
-                                <Form.Control type="radio" name="radio1" id="Panti Jompo" value="Panti Jompo"/><Form.Label htmlFor="Panti Jompo" className="label-1">Panti Jompo</Form.Label>
-                                <Form.Control type="radio" name="radio1" id="Panti Asuhan" value="Panti Asuhan"/><Form.Label htmlFor="Panti Asuhan" className="label-1">Panti Asuhan</Form.Label>
-                                <Form.Control type="radio" name="radio1" id="Janda" value="Janda"/><Form.Label htmlFor="Janda" className="label-1">Janda</Form.Label>
+                                { (!categoryLoading && !categoryError) && categoryList }
                             </Form.Group>
-                            
+                            <br/>
                             <Form.Group className="user cf col">
-                                <Form.Control type="radio" name="radio4" id="Nikmatul" value="Nikmatul" onClick={handleNameChange}/><Form.Label htmlFor="Nikmatul" className="label-2">
-                                    <img src={ process.env.PUBLIC_URL + `../images/Profile.png` } alt="" className="label-pic"></img>
-                                    <p className="label-name">Nikmatul</p>
-                                    <p className="label-status">Lansia</p>
-                                </Form.Label>
-                                <Form.Control type="radio" name="radio4" id="Titi Kamal" value="Titi Kamal" onClick={handleNameChange}/><Form.Label htmlFor="Titi Kamal" className="label-2">
-                                    <img src={ process.env.PUBLIC_URL + `../images/Profile.png` } alt="" className="label-pic"></img>
-                                    <p className="label-name">Titi Kamal</p>
-                                    <p className="label-status">Lansia</p>
-                                </Form.Label>
-                                <Form.Control type="radio" name="radio4" id="Anya Ronaldo" value="Anya Ronaldo" onClick={handleNameChange}/><Form.Label htmlFor="Anya Ronaldo" className="label-2">
-                                    <img src={ process.env.PUBLIC_URL + `../images/Profile.png` } alt="" className="label-pic"></img>
-                                    <p className="label-name">Anya Ronaldo</p>
-                                    <p className="label-status">Lansia</p>
-                                </Form.Label>
-                                <Form.Control type="radio" name="radio4" id="Fatmawati" value="Fatmawati" onClick={handleNameChange}/><Form.Label htmlFor="Fatmawati" className="label-2">
-                                    <img src={ process.env.PUBLIC_URL + `../images/Profile.png` } alt="" className="label-pic"></img>
-                                    <p className="label-name">Fatmawati</p>
-                                    <p className="label-status">Lansia</p>
-                                </Form.Label>
-                                <Form.Control type="radio" name="radio4" id="Nasikhin" value="Nasikhin" onClick={handleNameChange}/><Form.Label htmlFor="Nasikhin" className="label-2">
-                                    <img src={ process.env.PUBLIC_URL + `../images/Profile.png` } alt="" className="label-pic"></img>
-                                    <p className="label-name">Nasikhin</p>
-                                    <p className="label-status">Lansia</p>
-                                </Form.Label>
+                                { (!benefitLoading && !benefitError) && benefitList }
                                 <Form.Control type="radio" name="radio4" id="See All" value="See All"/><Form.Label htmlFor="See All" className="label-2">
                                     <IoIosArrowDroprightCircle className="label-pic color-pink"/>
                                     <p className="label-name color-pink">See All</p>
                                 </Form.Label>
                             </Form.Group>	
+
                             <br/><br/><br/><br/><br/><br/><br/><br/><br/><br/>
                             <h1 className="donate-title">Donation Amount</h1>
                             <Form.Control type="number" className="donate-amount-form" required
