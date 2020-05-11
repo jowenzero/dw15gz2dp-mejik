@@ -153,7 +153,7 @@ const Home = () => {
                     </Button>
                 </Container>
             }
-            { location === "Welcome" && localStorage.getItem('userLogin') === 'false' &&
+            { location === "Welcome" &&
                 <Container fluid>
                     <br/><br/><br/><br/><br/><br/><br/>
                     <img src={Logo} alt="" className="welcome-image"></img>
