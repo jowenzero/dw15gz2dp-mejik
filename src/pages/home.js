@@ -1,15 +1,14 @@
-import React from 'react';
+import React, { useEffect, useCallback } from 'react';
 import { Container, Button, Form } from "react-bootstrap";
 import { IoIosArrowBack } from "react-icons/io";
 import { AiOutlineMail, AiOutlineLock } from "react-icons/ai";
 import { API } from "../config/api";
+import { useDispatch, useSelector } from "react-redux";
+import { getArticles } from "../_actions/article";
 
 import Logo from '../logos/logo-foundation.svg'
-
 import Header from '../components/header'
 import Navbar from '../components/navbar'
-
-import Article from '../datas/article.json'
 import ContentItem from '../components/content_item';
 
 import '../styles/donate.css';
@@ -65,9 +64,27 @@ const Home = () => {
         setLocation("Home");
     };
 
-    const data = Article.map((item, index) => (
-        <ContentItem item={item} key={index}/>
-    ))
+    const article = useSelector(state => state.article.data);
+    const loading = useSelector(state => state.article.loading);
+    const error = useSelector(state => state.article.error);
+
+    const dispatch = useDispatch();
+
+    const initFetch = useCallback(() => {
+        dispatch(getArticles());
+    }, [dispatch]);
+    
+    useEffect(() => {
+        initFetch();
+    }, [initFetch]);
+
+    let data;
+
+    if (!loading && !error && article) {
+        data = article.articles.map((item, index) => (
+            <ContentItem item={item} key={index}/>
+        ))
+    }
 
     if (localStorage.getItem('userLogin') === 'true' && location !== "Home") {
         showHome();
@@ -307,7 +324,7 @@ const Home = () => {
             { location === "Home" && localStorage.getItem('userLogin') === 'true' &&
                 <div className="area-color">
                     <Header location={location}/>
-                    { data }
+                    { (!loading && !error) && data }
                     <Navbar/>
                 </div>
             }
