@@ -2,6 +2,7 @@ import React from 'react';
 import { Container, Button, Form } from "react-bootstrap";
 import { IoIosArrowBack } from "react-icons/io";
 import { AiOutlineMail, AiOutlineLock } from "react-icons/ai";
+import { API } from "../config/api";
 
 import Logo from '../logos/logo-foundation.svg'
 
@@ -18,14 +19,15 @@ import '../styles/login.css';
 const Home = () => {
     const [location, setLocation] = React.useState("Welcome");
     const [loginEmail, setLoginEmail] = React.useState("");
-    const [loginPass, setPassEmail] = React.useState("");
+    const [loginPass, setLoginPass] = React.useState("");
     const [user, setUser] = React.useState({});
+    const [loginFail, setLoginFail] = React.useState(false);
 
     const handleLoginEmailChange = (event) => {
         setLoginEmail(event.target.value);
     };
     const handleLoginPassChange = (event) => {
-        setPassEmail(event.target.value);
+        setLoginPass(event.target.value);
     };
     const handleUserChange = (event) => {
         const { data } = user;
@@ -34,8 +36,16 @@ const Home = () => {
         });
     };
 
+    const showLoginFail = () => {
+        setLoginFail(true);
+    };
+    const hideLoginFail = () => {
+        setLoginFail(false);
+    };
+
     const showWelcome = () => {
         localStorage.setItem('userLogin', 'false');
+        hideLoginFail();
         setLocation("Welcome");
     };
     const showLogin1 = () => {
@@ -62,6 +72,97 @@ const Home = () => {
     if (localStorage.getItem('userLogin') === 'true' && location !== "Home") {
         showHome();
     }
+
+    const login1 = async (event) => {
+        try {
+            event.preventDefault();
+            showLogin2();
+        } catch (error) {
+
+        }
+    };
+
+    const login2 = async (event) => {
+        try {
+            event.preventDefault();
+
+            const user = await API({
+                method: 'post',
+                data: {
+                    query: `
+                        mutation {
+                            login (
+                            input: {
+                                email: "${loginEmail}"
+                                password: "${loginPass}"
+                            }
+                            ) {
+                                user {
+                                    id
+                                    email
+                                }
+                                token
+                            }
+                        }
+                    `
+                }
+            })
+
+            const newData = user.data.data;
+            console.log(newData.login.token);
+
+            localStorage.setItem('userToken', newData.login.token);
+            hideLoginFail();
+            showHome();
+        } catch (error) {
+            localStorage.setItem('userLogin', 'false');
+            showLoginFail();
+            setLoginEmail("");
+            setLoginPass("");
+            showLogin1();
+        }
+    };
+
+    const register = async (event) => {
+        try {
+            event.preventDefault();
+            const { data } = user;
+
+            const newUser = await API({
+                method: 'post',
+                data: {
+                    query: `
+                        mutation {
+                            register (
+                            input: {
+                                firstName: "${data.firstName}"
+                                lastName: "${data.lastName}"
+                                email: "${data.email}"
+                                password: "${data.password}"
+                                phoneNumber: "${data.phone}"
+                            }
+                            ) {
+                                user {
+                                    id
+                                    email
+                                }
+                                token
+                            }
+                        }
+                    `
+                }
+            })
+
+            const newData = newUser.data.data;
+            console.log(newData);
+
+            localStorage.setItem('userToken', newData.login.token);
+            setUser({});
+            showHome();
+        } catch (error) {
+            localStorage.setItem('userLogin', 'false');
+        }
+    };
     
     return (
         <>
@@ -72,7 +173,7 @@ const Home = () => {
                     <br/><br/><br/>
                     <h3 className="login-title">Registration</h3>
                     <p className="login-text">Please complete your details below to register</p>
-                    <Form>
+                    <Form onSubmit={register}>
                         <Form.Group controlId="firstName">
                             <Form.Label className="login-form">First Name</Form.Label>
                             <Form.Control type="text" required
@@ -120,7 +221,7 @@ const Home = () => {
                             />
                         </Form.Group>
                         <br/>
-                        <Button variant="danger" type="submit" onClick={showHome} block>
+                        <Button variant="danger" type="submit" block>
                             Continue
                         </Button>
                     </Form>
@@ -136,7 +237,7 @@ const Home = () => {
                     <h3 className="login-title">Password</h3>
                     <p className="login-text">Please enter your password to login to the application</p>
                     <br/>
-                    <Form>
+                    <Form onSubmit={login2}>
                         <Form.Group controlId="password">
                             <Form.Label className="login-form">Password</Form.Label>
                             <Form.Control type="password" required
@@ -147,7 +248,7 @@ const Home = () => {
                             />
                         </Form.Group>
                         <br/>
-                        <Button variant="danger" type="submit" onClick={showHome} block>
+                        <Button variant="danger" type="submit" block>
                             Next
                         </Button>
                     </Form>
@@ -163,7 +264,7 @@ const Home = () => {
                     <h3 className="login-title">Email</h3>
                     <p className="login-text">Please enter your registered email to login to the application</p>
                     <br/>
-                    <Form>
+                    <Form onSubmit={login1}>
                         <Form.Group controlId="email">
                             <Form.Label className="login-form">Email</Form.Label>
                             <Form.Control type="email" required
@@ -173,8 +274,13 @@ const Home = () => {
                                 placeholder="e.g. mejikfoundation@mail.com"
                             />
                         </Form.Group>
-                        <br/>
-                        <Button variant="danger" type="submit" onClick={showLogin2} block>
+                        { loginFail === true &&
+                            <p style={{ color: 'red' }}>Login Failed!</p>
+                        }
+                        { loginFail === false &&
+                            <br/>
+                        }
+                        <Button variant="danger" type="submit" block>
                             Next
                         </Button>
                     </Form>

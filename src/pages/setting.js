@@ -17,6 +17,7 @@ const Setting = () => {
 
     const showWelcome = () => {
         localStorage.setItem('userLogin', 'false');
+        localStorage.setItem('userToken', null);
         setHomeOK(true);
     };
 

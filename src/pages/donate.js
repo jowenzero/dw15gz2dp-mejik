@@ -16,6 +16,9 @@ const Donate = () => {
 
     var total = amount * timeline;
 
+    if (name !== null)
+        var [firstName, lastName] = name.split(" ");
+
     const handleAmountChange = (event) => {
         setAmount(event.target.value);
     };
@@ -70,7 +73,7 @@ const Donate = () => {
                                 <img src={ process.env.PUBLIC_URL + `../images/Profile.png` } alt="" className="confirm-bill-pic"></img>
                             </Col>
                             <Col xs={5}>
-                                <p className="confirm-bill-name">{name}</p>
+                                <p className="confirm-bill-name">{firstName} {lastName}</p>
                                 <p className="confirm-bill-status">Lansia</p>
                             </Col>
                             <Col xs={1}>

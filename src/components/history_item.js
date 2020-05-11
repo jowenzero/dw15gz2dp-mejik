@@ -16,7 +16,7 @@ const HistoryItem = ({item}) => {
                 </Col>
                 <Col xs={5}>
                     <h3 className="history-title">{item.firstName} {item.lastName}</h3>
-                    <p className="history-description">{item.status}</p>
+                    <p className="history-description">Homeless</p>
                 </Col>
                 <Col xs={5}>
                     <p className="history-amount">Rp.{formatNumber(item.total)}</p>
