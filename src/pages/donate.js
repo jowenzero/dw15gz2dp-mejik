@@ -2,6 +2,7 @@ import React from 'react';
 import { Form, Navbar, Container, Button, Row, Col } from "react-bootstrap";
 import { IoIosArrowDroprightCircle, IoIosArrowBack } from "react-icons/io";
 import { Link } from 'react-router-dom';
+import { useSelector } from "react-redux";
 
 import Header from '../components/header'
 import '../styles/donate.css';
@@ -9,6 +10,10 @@ import '../styles/confirm.css';
 import '../styles/header.css';
 
 const Donate = () => {
+    const data = useSelector(state => state.user.data);
+    const loading = useSelector(state => state.user.loading);
+    const error = useSelector(state => state.user.error);
+
     const [location, setLocation] = React.useState("Donate");
     const [amount, setAmount] = React.useState(0);
     const [timeline, setTimeline] = React.useState(1);
@@ -56,15 +61,17 @@ const Donate = () => {
                         </Navbar>
                     </Container>
 
-                    <div className="confirm-white-bg">
-                        <br/>
-                        <img src={ process.env.PUBLIC_URL + `../images/Proof.png` } alt="" className="confirm-pic"></img>
-                        <br/><br/>
-                        <p className="confirm-details">Virtual Account</p>
-                        <p className="confirm-name">0001-2846-1819-2910</p>
-                        <p className="confirm-details">Name Holder</p>
-                        <p className="confirm-name">Ray Collins</p>
-                    </div>
+                    { (!loading && !error) && data &&
+                        <div className="confirm-white-bg">
+                            <br/>
+                            <img src={ process.env.PUBLIC_URL + `../images/Proof.png` } alt="" className="confirm-pic"></img>
+                            <br/><br/>
+                            <p className="confirm-details">Virtual Account</p>
+                            <p className="confirm-name">0001-2846-1819-2910</p>
+                            <p className="confirm-details">Name Holder</p>
+                            <p className="confirm-name">{data.user.firstName} {data.user.lastName}</p>
+                        </div>
+                    }
         
                     <Container fluid className="confirm-white-bg">
                         <p className="confirm-name-2">Bill Summary</p>

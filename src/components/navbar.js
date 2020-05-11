@@ -1,10 +1,22 @@
-import React from 'react';
+import React, { useEffect, useCallback } from 'react';
 import { Container, Navbar, Button } from 'react-bootstrap';
 import { Link } from 'react-router-dom';
+import { useDispatch } from "react-redux";
+import { getUser } from "../_actions/user";
 
 import '../styles/navbar.css';
 
 const NavBar = () => {
+    const dispatch = useDispatch();
+
+    const initFetch = useCallback(() => {
+        dispatch(getUser());
+    }, [dispatch]);
+    
+    useEffect(() => {
+        initFetch();
+    }, [initFetch]);
+
     return (
         <Container fluid className="padding-bottom">
             <Navbar bg="white" fixed="bottom" className="navbar-bottom">             

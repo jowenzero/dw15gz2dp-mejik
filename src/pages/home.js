@@ -109,7 +109,6 @@ const Home = () => {
             })
 
             const newData = user.data.data;
-            console.log(newData.login.token);
 
             localStorage.setItem('userToken', newData.login.token);
             hideLoginFail();
@@ -154,13 +153,14 @@ const Home = () => {
             })
 
             const newData = newUser.data.data;
-            console.log(newData);
+            console.log(newData)
 
-            localStorage.setItem('userToken', newData.login.token);
+            localStorage.setItem('userToken', newData.register.token);
             setUser({});
             showHome();
         } catch (error) {
-            localStorage.setItem('userLogin', 'false');
+            localStorage.setItem('userLogin', 'false')
+            setUser({});
         }
     };
     
