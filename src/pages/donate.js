@@ -2,6 +2,7 @@ import React, { useEffect, useCallback } from 'react';
 import { Form, Navbar, Container, Button, Row, Col } from "react-bootstrap";
 import { IoIosArrowDroprightCircle, IoIosArrowBack } from "react-icons/io";
 import { useSelector, useDispatch } from "react-redux";
+import { Redirect } from 'react-router-dom';
 import { getBeneficiaries } from "../_actions/beneficiary";
 import { getCategories } from "../_actions/category";
 import { API, setAuthToken } from "../config/api";
@@ -39,6 +40,7 @@ const Donate = () => {
     const [amount, setAmount] = React.useState(0);
     const [timeline, setTimeline] = React.useState(1);
     const [name, setName] = React.useState(null);
+    const [historyOK, setHistoryOK] = React.useState(false);
 
     var total = amount * timeline;
 
@@ -75,21 +77,21 @@ const Donate = () => {
 
     if (!benefitLoading && !benefitError && beneficiary) {
         benefitList = beneficiary.beneficiaries.map((item, index) => (
-            <>
+            <div key={index}>
                 <Form.Control type="radio" name="radio4" id={item.id} value={item.id + "|" + item.firstName + "|" + item.lastName} onClick={handleNameChange}/><Form.Label htmlFor={item.id} className="label-2">
                     <img src={ process.env.PUBLIC_URL + `../images/Profile.png` } alt="" className="label-pic"></img>
                     <p className="label-name">{item.firstName + " " + item.lastName}</p>
                     <p className="label-status">Lansia</p>
                 </Form.Label>
-            </>
+            </div>
         ))
     }
 
     if (!categoryLoading && !categoryError && category) {
         categoryList = category.categories.map((item, index) => (
-            <>
+            <div key={index}>
                 <Form.Control type="radio" name="radio1" id={item.id} value={item.name}/><Form.Label htmlFor={item.id} className="label-1">{item.name}</Form.Label>
-            </>
+            </div>
         ))
     }
 
@@ -126,6 +128,7 @@ const Donate = () => {
                 }
             })
             console.log(newTransaction.data.data)
+            setHistoryOK(true)
         } catch (error) {
             console.log(error)
         }
@@ -133,6 +136,9 @@ const Donate = () => {
 
     return (
         <>
+            { historyOK &&
+                <Redirect to="/history"/>
+            }
             { location === "Confirm" &&
                 <div className="confirm-bg">
                     <Container fluid className="padding-header">
