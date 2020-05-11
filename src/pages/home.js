@@ -17,6 +17,22 @@ import '../styles/login.css';
 
 const Home = () => {
     const [location, setLocation] = React.useState("Welcome");
+    const [loginEmail, setLoginEmail] = React.useState("");
+    const [loginPass, setPassEmail] = React.useState("");
+    const [user, setUser] = React.useState({});
+
+    const handleLoginEmailChange = (event) => {
+        setLoginEmail(event.target.value);
+    };
+    const handleLoginPassChange = (event) => {
+        setPassEmail(event.target.value);
+    };
+    const handleUserChange = (event) => {
+        const { data } = user;
+        setUser({
+            data: { ...data, [event.target.name]: event.target.value },
+        });
+    };
 
     const showWelcome = () => {
         localStorage.setItem('userLogin', 'false');
@@ -61,7 +77,8 @@ const Home = () => {
                             <Form.Label className="login-form">First Name</Form.Label>
                             <Form.Control type="text" required
                                 name="firstName" 
-                                value=""
+                                value={ user.firstName && user.firstName } 
+                                onChange={handleUserChange} 
                                 placeholder="e.g. Ray"
                             />
                         </Form.Group>
@@ -69,7 +86,8 @@ const Home = () => {
                             <Form.Label className="login-form">Last Name</Form.Label>
                             <Form.Control type="text" required
                                 name="lastName" 
-                                value=""
+                                value={ user.lastName && user.lastName } 
+                                onChange={handleUserChange} 
                                 placeholder="e.g. Collins"
                             />
                         </Form.Group>
@@ -77,7 +95,8 @@ const Home = () => {
                             <Form.Label className="login-form">Email</Form.Label>
                             <Form.Control type="email" required
                                 name="email"
-                                value=""
+                                value={ user.email && user.email } 
+                                onChange={handleUserChange}
                                 placeholder="e.g. mejikfoundation@mail.com"
                             />
                         </Form.Group>
@@ -85,7 +104,8 @@ const Home = () => {
                             <Form.Label className="login-form">Password</Form.Label>
                             <Form.Control type="password" required
                                 name="password"
-                                value=""
+                                value={ user.password && user.password } 
+                                onChange={handleUserChange}
                                 placeholder="Enter your password..."
                             />
                         </Form.Group>
@@ -93,7 +113,8 @@ const Home = () => {
                             <Form.Label className="login-form">Phone</Form.Label>
                             <Form.Control type="tel" required
                                 name="phone" 
-                                value=""
+                                value={ user.phone && user.phone } 
+                                onChange={handleUserChange}
                                 pattern="[0-9]{4}-[0-9]{4}-[0-9]{4}" 
                                 placeholder="e.g. 0812-3456-7890" 
                             />
@@ -115,18 +136,21 @@ const Home = () => {
                     <h3 className="login-title">Password</h3>
                     <p className="login-text">Please enter your password to login to the application</p>
                     <br/>
-                    <Form.Group controlId="password">
-                        <Form.Label className="login-form">Password</Form.Label>
-                        <Form.Control type="password" required
-                            name="password"
-                            value=""
-                            placeholder="Enter your password..."
-                        />
-                    </Form.Group>
-                    <br/>
-                    <Button variant="danger" onClick={showHome} block>
-                        Next
-                    </Button>
+                    <Form>
+                        <Form.Group controlId="password">
+                            <Form.Label className="login-form">Password</Form.Label>
+                            <Form.Control type="password" required
+                                name="password"
+                                value={loginPass}
+                                onChange={handleLoginPassChange}
+                                placeholder="Enter your password..."
+                            />
+                        </Form.Group>
+                        <br/>
+                        <Button variant="danger" type="submit" onClick={showHome} block>
+                            Next
+                        </Button>
+                    </Form>
                 </Container>
             }
             { location === "Login1" && localStorage.getItem('userLogin') === 'false' &&
@@ -139,18 +163,21 @@ const Home = () => {
                     <h3 className="login-title">Email</h3>
                     <p className="login-text">Please enter your registered email to login to the application</p>
                     <br/>
-                    <Form.Group controlId="email">
-                        <Form.Label className="login-form">Email</Form.Label>
-                        <Form.Control type="email" required
-                            name="email"
-                            value=""
-                            placeholder="e.g. mejikfoundation@mail.com"
-                        />
-                    </Form.Group>
-                    <br/>
-                    <Button variant="danger" onClick={showLogin2} block>
-                        Next
-                    </Button>
+                    <Form>
+                        <Form.Group controlId="email">
+                            <Form.Label className="login-form">Email</Form.Label>
+                            <Form.Control type="email" required
+                                name="email"
+                                value={loginEmail}
+                                onChange={handleLoginEmailChange}
+                                placeholder="e.g. mejikfoundation@mail.com"
+                            />
+                        </Form.Group>
+                        <br/>
+                        <Button variant="danger" type="submit" onClick={showLogin2} block>
+                            Next
+                        </Button>
+                    </Form>
                 </Container>
             }
             { location === "Welcome" &&
