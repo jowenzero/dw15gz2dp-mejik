@@ -1,7 +1,7 @@
 import { GET_ARTICLES } from "../constants/action-types";
 import { API } from "../config/api";
 
-export const getArticles = (currDate) => {
+export const getArticles = () => {
   return {
     type: GET_ARTICLES,
     async payload() {

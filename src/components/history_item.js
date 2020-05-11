@@ -15,7 +15,7 @@ const HistoryItem = ({item}) => {
                     <img src={ process.env.PUBLIC_URL + "../images/Profile.png" } alt="" className="history-image"></img>
                 </Col>
                 <Col xs={5}>
-                    <h3 className="history-title">{item.firstName} {item.lastName}</h3>
+                    <h3 className="history-title">{item.beneficiary.firstName} {item.beneficiary.lastName}</h3>
                     <p className="history-description">Homeless</p>
                 </Col>
                 <Col xs={5}>
