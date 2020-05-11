@@ -1,15 +1,28 @@
-import React from 'react';
+import React, { useEffect, useCallback } from 'react';
 import { Container, Navbar } from 'react-bootstrap';
 import { MdSearch } from "react-icons/md";
 import { AiOutlineHistory, AiOutlineClose } from "react-icons/ai";
 import { IoIosArrowBack } from "react-icons/io";
 import { Redirect } from 'react-router-dom';
+import { useDispatch } from "react-redux";
+import { getUser } from "../_actions/user";
 
 import '../styles/header.css';
 
 const Header = ({location}) => {
     const [cancelOk, setCancelOK] = React.useState(false);
     const [historyOk, setHistoryOK] = React.useState(false);
+
+    const dispatch = useDispatch();
+
+    const initFetch = useCallback(() => {
+        dispatch(getUser());
+    }, [dispatch]);
+    
+    useEffect(() => {
+        initFetch();
+    }, [initFetch]);
+
 
     return (
         <Container fluid className="padding-header">
