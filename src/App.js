@@ -3,6 +3,7 @@ import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
 
 import './styles/App.css';
 
+import Password from './pages/password';
 import History from './pages/history';
 import Donate from './pages/donate';
 import Setting from './pages/setting';
@@ -11,6 +12,7 @@ import Home from './pages/home';
 const App = () => (
   <Router>
     <Switch>  
+      <Route path="/password" exact component={Password}/>
       <Route path="/history" exact component={History}/>
       <Route path="/donate" exact component={Donate}/>
       <Route path="/setting" exact component={Setting}/>

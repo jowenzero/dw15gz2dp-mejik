@@ -13,6 +13,7 @@ const Setting = () => {
     const error = useSelector(state => state.user.error);
 
     const [historyOK, setHistoryOK] = React.useState(false);
+    const [passOK, setPassOK] = React.useState(false);
     const [homeOK, setHomeOK] = React.useState(false);
 
     const showWelcome = () => {
@@ -25,6 +26,9 @@ const Setting = () => {
         <div className="setting-bg">
             { historyOK &&
                 <Redirect to="/history"/>
+            }
+            { passOK &&
+                <Redirect to="/password"/>
             }
             { homeOK &&
                 <Redirect to="/"/>
@@ -62,7 +66,7 @@ const Setting = () => {
                 </h3>
             </div>
 
-            <div className="setting-white-bg" onClick={() => console.log("password")}>
+            <div className="setting-white-bg" onClick={() => setPassOK(true)}>
                 <AiOutlineLock className="setting-icons"/>
                 <h3 className="setting-button-text">
                     Change Password
