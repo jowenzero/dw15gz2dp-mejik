@@ -30,7 +30,7 @@ const Setting = () => {
                 <Redirect to="/"/>
             }
 
-            { (!loading && !error) && data &&
+            { (!loading && !error) && data.user &&
                 <>
                     <div className="setting-pic-bg">
                         <p className="setting-edit">Edit</p>
