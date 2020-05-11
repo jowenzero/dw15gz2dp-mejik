@@ -15,6 +15,11 @@ const Setting = () => {
     const [historyOK, setHistoryOK] = React.useState(false);
     const [homeOK, setHomeOK] = React.useState(false);
 
+    const showWelcome = () => {
+        localStorage.setItem('userLogin', 'false');
+        setHomeOK(true);
+    };
+
     return (
         <div className="setting-bg">
             { historyOK &&
@@ -58,7 +63,7 @@ const Setting = () => {
                 </h3>
             </div>
 
-            <div className="setting-white-bg" onClick={() => setHomeOK(true)}>
+            <div className="setting-white-bg" onClick={showWelcome}>
                 <AiOutlineLogout className="setting-icons color-red"/>
                 <h3 className="setting-button-text color-red">
                     Logout

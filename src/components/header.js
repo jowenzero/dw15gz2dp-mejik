@@ -14,7 +14,7 @@ const Header = ({location}) => {
     return (
         <Container fluid className="padding-header">
             { cancelOk &&
-                <Redirect to="/"/>
+                <Redirect to="/setting"/>
             }
             { historyOk &&
                 <Redirect to="/history"/>

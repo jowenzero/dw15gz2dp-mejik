@@ -19,18 +19,23 @@ const Home = () => {
     const [location, setLocation] = React.useState("Welcome");
 
     const showWelcome = () => {
+        localStorage.setItem('userLogin', 'false');
         setLocation("Welcome");
     };
     const showLogin1 = () => {
+        localStorage.setItem('userLogin', 'false');
         setLocation("Login1");
     };
     const showLogin2 = () => {
+        localStorage.setItem('userLogin', 'false');
         setLocation("Login2");
     };
     const showRegister = () => {
+        localStorage.setItem('userLogin', 'false');
         setLocation("Register");
     };
     const showHome = () => {
+        localStorage.setItem('userLogin', 'true');
         setLocation("Home");
     };
 
@@ -38,9 +43,13 @@ const Home = () => {
         <ContentItem item={item} key={index}/>
     ))
 
+    if (localStorage.getItem('userLogin') === 'true' && location !== "Home") {
+        showHome();
+    }
+    
     return (
         <>
-            { location === "Register" &&
+            { location === "Register" && localStorage.getItem('userLogin') === 'false' &&
                 <Container fluid>
                     <br/>
                     <IoIosArrowBack className="login-icons" onClick={showWelcome}/>    
@@ -96,7 +105,7 @@ const Home = () => {
                     </Form>
                 </Container>
             }
-            { location === "Login2" &&
+            { location === "Login2" && localStorage.getItem('userLogin') === 'false' &&
                 <Container fluid>
                     <br/>
                     <IoIosArrowBack className="login-icons" onClick={showLogin1}/>    
@@ -120,7 +129,7 @@ const Home = () => {
                     </Button>
                 </Container>
             }
-            { location === "Login1" &&
+            { location === "Login1" && localStorage.getItem('userLogin') === 'false' &&
                 <Container fluid>
                     <br/>
                     <IoIosArrowBack className="login-icons" onClick={showWelcome}/>    
@@ -144,7 +153,7 @@ const Home = () => {
                     </Button>
                 </Container>
             }
-            { location === "Welcome" &&
+            { location === "Welcome" && localStorage.getItem('userLogin') === 'false' &&
                 <Container fluid>
                     <br/><br/><br/><br/><br/><br/><br/>
                     <img src={Logo} alt="" className="welcome-image"></img>
@@ -162,7 +171,7 @@ const Home = () => {
                     </Button>
                 </Container>
             }
-            { location === "Home" &&
+            { location === "Home" && localStorage.getItem('userLogin') === 'true' &&
                 <div className="area-color">
                     <Header location={location}/>
                     { data }
