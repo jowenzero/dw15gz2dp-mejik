@@ -61,7 +61,7 @@ const Donate = () => {
                         </Navbar>
                     </Container>
 
-                    { (!loading && !error) && data &&
+                    { (!loading && !error) && data.user &&
                         <div className="confirm-white-bg">
                             <br/>
                             <img src={ process.env.PUBLIC_URL + `../images/Proof.png` } alt="" className="confirm-pic"></img>

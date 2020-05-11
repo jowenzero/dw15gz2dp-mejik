@@ -11,6 +11,7 @@ import '../styles/header.css';
 
 const Header = ({location}) => {
     const [cancelOk, setCancelOK] = React.useState(false);
+    const [cancel2Ok, setCancel2OK] = React.useState(false);
     const [historyOk, setHistoryOK] = React.useState(false);
 
     const dispatch = useDispatch();
@@ -27,6 +28,9 @@ const Header = ({location}) => {
     return (
         <Container fluid className="padding-header">
             { cancelOk &&
+                <Redirect to="/"/>
+            }
+            { cancel2Ok &&
                 <Redirect to="/setting"/>
             }
             { historyOk &&
@@ -47,7 +51,7 @@ const Header = ({location}) => {
             }
             { location === "History" && 
                 <Navbar bg="white" fixed="top" className="justify-content-between navbar-header">   
-                    <IoIosArrowBack onClick={() => setCancelOK(true)} className="home-icons"/>          
+                    <IoIosArrowBack onClick={() => setCancel2OK(true)} className="home-icons"/>          
                     <h1 className="header-text">History</h1>
                     <MdSearch className="home-icons"/>
                 </Navbar>
