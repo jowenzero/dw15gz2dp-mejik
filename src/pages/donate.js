@@ -227,7 +227,7 @@ const Donate = () => {
                                 </Form.Label>
                             </Form.Group>	
 
-                            <br/><br/><br/><br/><br/><br/><br/><br/><br/><br/>
+                            <br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/>
                             <h1 className="donate-title">Donation Amount</h1>
                             <Form.Control type="number" className="donate-amount-form" required
                                 name="amount"

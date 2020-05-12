@@ -80,7 +80,7 @@ const Home = () => {
 
     let data;
 
-    if (!loading && !error && article) {
+    if (!loading && !error && article.articles) {
         data = article.articles.map((item, index) => (
             <ContentItem item={item} key={index}/>
         ))
